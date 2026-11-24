@@ -1,0 +1,175 @@
+/* ============================================================
+   🐧 DERANGED LINUX TERMINAL TOY — Styles
+   toys/linux-terminal/linux-terminal.css
+   ============================================================ */
+
+/* ── Wrapper (full-screen overlay, below toybox/settings z-index) ─────────── */
+#toy-linux-terminal-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* wrapper is click-through */
+}
+
+/* ── The terminal window itself ──────────────────────────────────────────── */
+.linux-terminal-window {
+  pointer-events: all;
+  width: min(860px, 92vw);
+  height: min(520px, 80vh);
+  background: rgba(10, 10, 10, 0.97);
+  border: 3px solid #39ff14;
+  border-radius: 10px;
+  box-shadow:
+    0 0 18px #39ff14,
+    0 0 40px rgba(57, 255, 20, 0.3),
+    0 8px 40px rgba(0,0,0,0.9);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+  font-size: 14px;
+  overflow: hidden;
+  resize: both;
+  /* draggable via JS */
+  position: absolute;
+}
+
+/* ── Title bar ───────────────────────────────────────────────────────────── */
+.linux-terminal-titlebar {
+  background: #111;
+  border-bottom: 2px solid #39ff14;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: grab;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.linux-terminal-titlebar:active {
+  cursor: grabbing;
+}
+
+.linux-terminal-title-text {
+  flex: 1;
+  color: #39ff14;
+  font-size: 13px;
+  font-weight: bold;
+  text-shadow: 0 0 6px #39ff14;
+  letter-spacing: 1px;
+}
+
+/* traffic-light buttons */
+.linux-terminal-btn {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+.linux-terminal-btn:hover { opacity: 0.75; }
+.linux-terminal-btn.close  { background: #ff5f57; }
+.linux-terminal-btn.min    { background: #febc2e; }
+.linux-terminal-btn.max    { background: #28c840; }
+
+/* ── Output area ─────────────────────────────────────────────────────────── */
+.linux-terminal-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 14px 4px 14px;
+  line-height: 1.6;
+  color: #ccffcc;
+  word-break: break-word;
+  scroll-behavior: smooth;
+}
+
+.linux-terminal-output::-webkit-scrollbar { width: 7px; }
+.linux-terminal-output::-webkit-scrollbar-track { background: #0a0a0a; }
+.linux-terminal-output::-webkit-scrollbar-thumb { background: #39ff14; border-radius: 4px; }
+
+/* output line types */
+.term-line { display: block; white-space: pre-wrap; }
+.term-green  { color: #39ff14; }
+.term-yellow { color: #ffd700; }
+.term-cyan   { color: #00e5ff; }
+.term-red    { color: #ff4444; }
+.term-blue   { color: #5599ff; }
+.term-dim    { color: #666; }
+.term-prompt { color: #39ff14; }
+.term-cmd    { color: #fff; }
+
+/* ── Rickroll lyric line ─────────────────────────────────────────────────── */
+.rickroll-lyric {
+  display: block;
+  animation: lyric-appear 0.3s ease-out both;
+  text-shadow: 0 0 8px currentColor;
+}
+
+@keyframes lyric-appear {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Input row ───────────────────────────────────────────────────────────── */
+.linux-terminal-inputrow {
+  display: flex;
+  align-items: center;
+  padding: 6px 14px 10px 14px;
+  gap: 0;
+  border-top: 1px solid #1a2e1a;
+  flex-shrink: 0;
+  background: rgba(10, 10, 10, 0.98);
+}
+
+.linux-terminal-prompt-label {
+  color: #39ff14;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  user-select: none;
+  text-shadow: 0 0 5px #39ff14;
+  flex-shrink: 0;
+}
+
+.linux-terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+  font-size: 14px;
+  font-weight: bold;
+  caret-color: #39ff14;
+  padding: 0 6px;
+}
+
+/* ── Rickroll header banner ──────────────────────────────────────────────── */
+.rickroll-banner {
+  display: block;
+  text-align: center;
+  padding: 4px 0;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* ── Blinking cursor block (shown when input disabled during rickroll) ────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.term-cursor {
+  display: inline-block;
+  width: 9px;
+  height: 1.1em;
+  background: #39ff14;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}

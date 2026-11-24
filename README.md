@@ -1,0 +1,51 @@
+# That1DutchGuy's Meme New Tab
+
+> Inspirational quote: "Mah boi, this new tab is what all true memers strive for!"
+
+---
+
+Always wanted to get that stupid corporate boring new tab of yours gone? <br>
+Well now you fucking can! 🤯 <br>
+I made a stupid version for both Chromium browsers and Firefox! 🌐🦊
+
+---
+
+### 🌐 Chromium version specs
+
+* 4K Meme Group Photo wallpaper bundled
+* Raw Comic Sans MS TTF file bundled
+* Unhinged CSS styling, with lotsa unhinged animations
+* Weather widget powered by Open-Meteo
+* Time and date display
+* Quick links stack
+* Settings panel where you can swap wallpapers and manage quick links, and other shit
+* Deranged Toybox panel with more toys coming soon 
+
+### Current toys available
+
+1. King Harkinian Desktop Pet - Browser Edition
+2. Deranged Linux Terminal
+
+---
+
+### 🔥🦊 Firefox version specs
+
+Pretty much the same in aesthetic, except it lacks a lot of settings and the whole Deranged Toybox feature.
+It's basically the Beta version of it. Still works, just less features bro. 🤷🏻‍♂️
+
+---
+
+### Screenshots gallery (taken in a Chromium browser)
+
+Main page screenshot 🌈 <br>
+<img src="./README-assets/main-page-screenshot.png" alt="Main page screenshot" width="1280px"/>
+
+Settings menu screenshot ⚙️ <br>
+<img src="./README-assets/settings-menu-screenshot.png" alt="Settings menu screenshot" width="1280px"/>
+
+Deranged Toybox screenshot 🧸 <br>
+<img src="./README-assets/deranged-toybox-screenshot.png" alt="Deranged Toybox screenshot" width="1280px"/>
+
+--- 
+
+(Note that the Firefox version won't get any updates anymore cuz I don't have the time nor the will to manage two seperate versions all the time 😔)

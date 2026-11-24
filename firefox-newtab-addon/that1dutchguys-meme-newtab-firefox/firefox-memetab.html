@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Tab</title>
+  <link rel="stylesheet" href="firefox-memetab.css">
+  <link rel="icon" type="image/png" href="./icons/icon.png">
+</head>
+<body>
+
+  <!-- ==================== TOP ROW ==================== -->
+  <div class="top-row">
+
+    <!-- TOP-LEFT: WEATHER PANEL -->
+    <div class="weather-panel">
+      <div class="weather-location" id="weather-location">Loading...</div>
+      <div class="weather-current">
+        <span class="weather-icon" id="weather-icon">☀️</span>
+        <span class="weather-temp" id="weather-temp">--°</span>
+      </div>
+      <div class="weather-feels" id="weather-feels">Feels like --°</div>
+      <div class="weather-humidity" id="weather-humidity">-- Humidity</div>
+      <div class="weather-forecast" id="weather-forecast">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+
+    <!-- TOP-CENTER: CLOCK + DATE -->
+    <div class="clock-panel">
+      <h1 id="clock">00:00</h1>
+      <h2 id="date-display">Thursday, January 1</h2>
+    </div>
+
+    <!-- TOP-RIGHT: QUICK LINKS -->
+    <ul class="quick-links" id="quick-links">
+      <!-- Filled by JS -->
+    </ul>
+
+  </div><!-- end top-row -->
+
+  <!-- ==================== BOTTOM: SEARCH BAR ==================== -->
+  <div class="bottom-bar">
+    <div class="meme-search">
+      <span class="search-label">👑🔎 HARKINIAN SEARCH</span>
+
+      <select id="engine-select">
+        <option value="https://www.google.com/search?q=">Google</option>
+        <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+        <option value="https://www.bing.com/search?q=">Bing (ew)</option>
+        <option value="https://search.yahoo.com/search?p=">Yahoo</option>
+        <option value="https://www.youtube.com/results?search_query=">YouTube</option>
+        <option value="https://github.com/search?q=">GitHub</option>
+        <option value="https://www.reddit.com/search/?q=">Reddit</option>
+        <option value="https://www.twitch.tv/search?term=">Twitch</option>
+        <option value="https://www.wikipedia.org/w/index.php?search=">Wikipedia</option>
+      </select>
+
+      <input type="search" id="search-input" placeholder="THE KING DEMANDS A SEARCH..." />
+      <button id="search-btn">GO</button>
+    </div>
+  </div>
+
+  <!-- ==================== SETTINGS BUTTON ==================== -->
+  <button class="settings-btn" id="settings-btn" title="Settings ⚙️">⚙️</button>
+
+  <!-- ==================== SETTINGS OVERLAY ==================== -->
+  <div class="settings-overlay" id="settings-overlay">
+    <div class="settings-panel">
+
+      <div class="settings-header">
+        <span>⚙️ SETTINGS OF CHAOS</span>
+        <button class="settings-close" id="settings-close">✕ Close</button>
+      </div>
+
+      <!-- WALLPAPER SECTION -->
+      <div class="settings-section">
+        <h3>🖼️ WALLPAPER</h3>
+        <div class="wallpaper-controls">
+          <label class="settings-file-btn" for="wallpaper-input">📁 Choose Image</label>
+          <input type="file" id="wallpaper-input" accept="image/*">
+          <button class="settings-action-btn" id="wallpaper-reset">🔄 Reset Default</button>
+        </div>
+        <div class="wallpaper-name" id="wallpaper-name">Current: Meme-Group-Photo.png (default)</div>
+      </div>
+
+      <!-- QUICK LINKS SECTION -->
+      <div class="settings-section">
+        <h3>🔗 QUICK LINKS</h3>
+        <div id="links-list">
+          <!-- Rendered by JS -->
+        </div>
+
+        <div class="add-link-form">
+          <div class="add-link-title">➕ Add New Link</div>
+          <div class="add-link-row">
+            <input type="text"  id="new-link-name" placeholder="Link Name" class="settings-input">
+            <input type="url"   id="new-link-url"  placeholder="https://..." class="settings-input">
+          </div>
+          <div class="add-link-row add-link-row-icon">
+            <input type="url"   id="new-link-icon" placeholder="Icon URL (leave blank for auto)" class="settings-input" title="Custom favicon URL — leave blank to auto-fetch from the site">
+            <button class="settings-action-btn" id="add-link-btn">Add</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="firefox-memetab.js"></script>
+</body>
+</html>

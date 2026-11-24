@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "name": "That1DutchGuy's Meme New Tab",
+  "version": "3.0",
+  "description": "MEMES. CHAOS. COMIC SANS. THE KING DEMANDS A NEW TAB.",
+
+  "chrome_url_overrides": {
+    "newtab": "firefox-memetab.html"
+  },
+
+  "icons": {
+    "48": "icons/icon.png"
+  },
+
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "geolocation"
+  ],
+
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "that1dutchguys-memetab@that1dutchguy.github.io",
+      "strict_min_version": "109.0",
+      "data_collection_permissions": {
+        "required": ["locationInfo"]
+      }
+    }
+  }
+}

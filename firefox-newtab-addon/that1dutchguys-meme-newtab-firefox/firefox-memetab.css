@@ -1,0 +1,965 @@
+@font-face {
+  font-family: 'Comic Sans MS';
+  src: url('Comic-Sans-MS.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ==========================================
+   RESET + FULL-SCREEN BACKGROUND
+   ========================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-weight: bold;
+
+  background-image: url('Meme-Group-Photo.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* ==========================================
+   LAYOUT: TOP ROW (weather | clock | links)
+   ========================================== */
+
+.top-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  width: 100%;
+  padding: 14px 18px 0 18px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+/* ==========================================
+   BOTTOM BAR: SEARCH
+   ========================================== */
+
+.bottom-bar {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+
+  width: 60%;
+  min-width: 500px;
+  max-width: 900px;
+}
+
+/* ==========================================
+   RAINBOW PROPERTY
+   ========================================== */
+
+@property --spin-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ==========================================
+   TEXT SHADOW MIXIN (via CSS var)
+   ========================================== */
+
+:root {
+  --text-shadow-strong: 2px 2px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+}
+
+/* ==========================================
+   RAINBOW TEXT — clock, date, weather text
+   ========================================== */
+
+h1, h2,
+.weather-location,
+.weather-temp,
+.weather-feels,
+.weather-humidity,
+.forecast-day {
+  background: conic-gradient(
+    from var(--spin-angle),
+    red, orange, yellow, green, cyan, blue, magenta, red
+  ) !important;
+
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+
+  text-shadow: none !important;
+  filter:
+    drop-shadow(0px 0px 1px black)
+    drop-shadow(0px 0px 2px black)
+    drop-shadow(0px 0px 3px black)
+    drop-shadow(2px 3px 4px rgba(0,0,0,0.75));
+
+  animation: spin-text-rainbow 2s linear infinite;
+}
+
+/* ==========================================
+   CLOCK — top center
+   ========================================== */
+
+.clock-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 auto;        /* fills middle space to stay truly centered */
+  min-width: 0;
+}
+
+h1#clock {
+  font-size: 80px;
+  line-height: 1;
+  letter-spacing: 4px;
+  display: inline-block;
+
+  animation:
+    spin-text-rainbow 2s linear infinite,
+    clock-wobble 3s ease-in-out infinite !important;
+}
+
+h2#date-display {
+  font-size: 24px;
+  margin-top: 4px;
+  animation: spin-text-rainbow 2s linear infinite !important;
+}
+
+/* ==========================================
+   WEATHER PANEL — matches Tabliss layout
+   ========================================== */
+
+.weather-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 240px;
+  max-width: 310px;
+  flex: 0 0 auto;
+  padding: 10px 14px;
+}
+
+.weather-location {
+  font-size: 18px;
+  line-height: 1.3;
+  /* Allow wrapping so long city names don't overflow */
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.weather-current {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+/* Weather icon: flat emoji, no squish blob animation.
+   The horizontal-meme keyframe stretches it into a giant
+   glowing blob on Firefox — keep it static and readable. */
+.weather-icon {
+  font-size: 48px;
+  line-height: 1;
+  /* Must NOT inherit the rainbow background-clip rule */
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  color: unset !important;
+  -webkit-text-fill-color: unset !important;
+  filter: none !important;
+  /* Gentle bob instead of the extreme squish */
+  animation: weather-icon-bob 2.4s ease-in-out infinite !important;
+  display: inline-block;
+}
+
+.weather-temp {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.weather-feels,
+.weather-humidity {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.weather-forecast {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: nowrap;
+}
+
+/* Each day card: day-name / icon / hi°lo° */
+.forecast-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 13px;
+  gap: 2px;
+  line-height: 1.4;
+  min-width: 34px;
+  /* background-clip:text is set by the rainbow rule above;
+     child spans with explicit overrides stay unclipped */
+}
+
+.forecast-temps {
+  white-space: nowrap;
+  /* inherits rainbow from .forecast-day selector — that's fine */
+}
+
+.forecast-icon {
+  font-size: 22px;
+  /* Must NOT inherit rainbow clip — emoji would go invisible/square */
+  background: transparent !important;
+  background-image: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  color: unset !important;
+  -webkit-text-fill-color: unset !important;
+  filter: none !important;
+  animation: none !important;
+  display: block;
+  text-align: center;
+  /* Force emoji rendering */
+  font-variant-emoji: emoji;
+}
+
+/* forecast-day-name text span also needs to stay clear of square-box issues */
+.forecast-day-name {
+  display: block;
+  /* inherits rainbow from .forecast-day — that's intentional, text looks fine */
+}
+
+/* ==========================================
+   QUICK LINKS — top right column
+   ========================================== */
+
+.quick-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  list-style: none;
+  gap: 16px;             /* more vertical spacing between links */
+  min-width: 210px;
+  max-width: 260px;
+  flex: 0 0 auto;
+  padding: 10px 14px;
+}
+
+.quick-links li {
+  display: flex;
+}
+
+.quick-links a {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 14px;             /* more space so icon-chaos scale doesn't overlap text */
+
+  text-decoration: none;
+  font-size: 15px;
+
+  background: conic-gradient(
+    from var(--spin-angle),
+    red, orange, yellow, green, cyan, blue, magenta, red
+  ) !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  text-shadow: none !important;
+  filter:
+    drop-shadow(0px 0px 1px black)
+    drop-shadow(0px 0px 2px black)
+    drop-shadow(0px 0px 3px black)
+    drop-shadow(1px 2px 3px rgba(0,0,0,0.75));
+  animation: spin-text-rainbow 2s linear infinite;
+}
+
+.quick-links a span {
+  background: inherit !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Icons — chaos animation, no rainbow clip.
+   Outline is applied via canvas (addPixelOutline in JS), so no CSS filter needed. */
+.quick-links a img,
+.quick-links a svg,
+.quick-links a i {
+  display: inline-block;
+  min-width: 20px;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  color: unset !important;
+  -webkit-text-fill-color: unset !important;
+  filter: none !important;
+  animation: icon-chaos 1.5s ease-in-out infinite !important;
+}
+
+.quick-links li:nth-child(odd) a img,
+.quick-links li:nth-child(odd) a svg,
+.quick-links li:nth-child(odd) a i {
+  animation-direction: reverse !important;
+  animation-duration: 1.2s !important;
+}
+
+/* HOVER CHAOS */
+.quick-links a:hover {
+  animation:
+    spin-text-rainbow 0.5s linear infinite,
+    link-panic 0.25s infinite !important;
+  z-index: 10;
+}
+
+/* ==========================================
+   HARKINIAN / MORSHU SEARCH BAR
+   ========================================== */
+
+@property --meme-search-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.meme-search {
+  --meme-search-angle: 0deg;
+
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 10px 12px 10px 18px;
+
+  border: 5px solid transparent;
+  border-radius: 28px;
+
+  background:
+    linear-gradient(135deg, #17271b, #263b25) padding-box,
+    conic-gradient(
+      from var(--meme-search-angle),
+      #00ff66, #00ffff, #0066ff,
+      #a000ff, #ff00aa, #ff3030,
+      #ffff00, #00ff66
+    ) border-box;
+
+  box-shadow:
+    0 0 0 4px #25452b,
+    0 0 18px rgba(0, 255, 100, 0.55),
+    0 8px 22px rgba(0, 0, 0, 0.65);
+
+  animation: meme-search-rainbow 4s linear infinite !important;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.search-label {
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  font-family: 'Comic Sans MS', sans-serif !important;
+  font-weight: bold !important;
+  font-size: 14px;
+  -webkit-text-stroke: 0.5px black;
+  text-shadow:
+    2px  2px 0 black, -2px -2px 0 black,
+    2px -2px 0 black, -2px  2px 0 black,
+    0px  3px 0 black,  0px -3px 0 black,
+    3px  0px 0 black, -3px  0px 0 black,
+    3px  3px 4px rgba(0,0,0,0.9),
+    0 0 8px #39ff14;
+  white-space: nowrap;
+
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+/* ENGINE SELECT */
+#engine-select {
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 2px solid #39ff14;
+  background: #17321d;
+  color: #39ff14;
+  font-family: 'Comic Sans MS', sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+}
+
+#engine-select option {
+  background: #111;
+  color: #39ff14;
+}
+
+/* SEARCH INPUT */
+.meme-search input[type="search"],
+.meme-search input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 2px solid #243e2a;
+  border-radius: 13px;
+  outline: none;
+  background: linear-gradient(110deg, #e92b69, #ff3048) !important;
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  font-family: 'Comic Sans MS', sans-serif !important;
+  font-weight: bold !important;
+  font-size: 16px;
+  text-shadow: 1px 1px 2px black, 0 0 5px #39ff14;
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.3),
+    0 0 5px rgba(255, 0, 80, 0.5);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.meme-search input::placeholder {
+  color: #baff83 !important;
+  -webkit-text-fill-color: #baff83 !important;
+  opacity: 1 !important;
+  text-shadow: 1px 1px 2px black;
+}
+
+.meme-search input:focus {
+  border-color: #39ff14 !important;
+  box-shadow:
+    0 0 5px #39ff14,
+    0 0 12px rgba(57, 255, 20, 0.6),
+    inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* SEARCH BUTTON */
+.meme-search button {
+  border: 2px solid #39ff14 !important;
+  border-radius: 12px !important;
+  padding: 10px 18px;
+  background: #17321d !important;
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  font-family: 'Comic Sans MS', sans-serif !important;
+  font-weight: bold !important;
+  font-size: 16px;
+  text-shadow: 1px 1px 2px black;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+.meme-search button:hover {
+  background: #39ff14 !important;
+  color: #102010 !important;
+  -webkit-text-fill-color: #102010 !important;
+  box-shadow: 0 0 12px #39ff14;
+  transform: scale(1.06);
+}
+
+.meme-search:hover {
+  box-shadow:
+    0 0 0 4px #25452b,
+    0 0 25px rgba(0, 255, 100, 0.8),
+    0 0 45px rgba(0, 255, 255, 0.35),
+    0 8px 22px rgba(0, 0, 0, 0.65);
+  transform: scale(1.015);
+}
+
+.meme-search:focus-within {
+  box-shadow:
+    0 0 0 4px #25452b,
+    0 0 20px #39ff14,
+    0 0 35px rgba(0, 255, 100, 0.45);
+}
+
+/* ==========================================
+   SETTINGS BUTTON (bottom-right corner)
+   ========================================== */
+
+.settings-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 150;
+
+  width: 46px;
+  height: 46px;
+  font-size: 22px;
+  line-height: 1;
+
+  background: #17321d !important;
+  border: 2px solid #39ff14 !important;
+  border-radius: 50% !important;
+  color: unset !important;
+  -webkit-text-fill-color: unset !important;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Override global rainbow rule */
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+.settings-btn:hover {
+  transform: rotate(90deg) scale(1.15);
+  box-shadow: 0 0 20px #39ff14;
+}
+
+/* ==========================================
+   SETTINGS OVERLAY + PANEL
+   ========================================== */
+
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.settings-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.settings-panel {
+  background: linear-gradient(145deg, #0c1a0e, #17321d);
+  border: 3px solid #39ff14;
+  border-radius: 20px;
+  width: 520px;
+  max-width: 92vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 24px 28px;
+  box-shadow:
+    0 0 0 1px #25452b,
+    0 0 30px rgba(57, 255, 20, 0.45),
+    0 0 60px rgba(0, 0, 0, 0.8);
+
+  /* Override global rules */
+  animation: none !important;
+  filter: none !important;
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  font-family: 'Comic Sans MS', sans-serif;
+}
+
+/* Scrollbar styling for panel */
+.settings-panel::-webkit-scrollbar {
+  width: 8px;
+}
+.settings-panel::-webkit-scrollbar-track {
+  background: #0c1a0e;
+  border-radius: 4px;
+}
+.settings-panel::-webkit-scrollbar-thumb {
+  background: #39ff14;
+  border-radius: 4px;
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #2a5a30;
+  font-size: 20px;
+  font-weight: bold;
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  text-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
+
+  background: none !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+.settings-close {
+  background: transparent !important;
+  border: 2px solid #39ff14 !important;
+  border-radius: 10px !important;
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  font-family: 'Comic Sans MS', sans-serif !important;
+  font-weight: bold !important;
+  font-size: 14px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+.settings-close:hover {
+  background: #39ff14 !important;
+  color: #102010 !important;
+  -webkit-text-fill-color: #102010 !important;
+}
+
+.settings-section {
+  margin-bottom: 28px;
+}
+
+.settings-section h3 {
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 14px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid #2a5a30;
+  text-shadow: 0 0 6px rgba(57, 255, 20, 0.5);
+
+  background: none !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+/* ==========================================
+   WALLPAPER CONTROLS
+   ========================================== */
+
+.wallpaper-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.settings-file-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  background: #17321d !important;
+  border: 2px solid #39ff14;
+  border-radius: 10px;
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  font-family: 'Comic Sans MS', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-shadow: 1px 1px 2px black;
+}
+
+.settings-file-btn:hover {
+  background: #39ff14 !important;
+  color: #102010 !important;
+  -webkit-text-fill-color: #102010 !important;
+}
+
+#wallpaper-input {
+  display: none;
+}
+
+.settings-action-btn {
+  padding: 8px 14px;
+  background: #17321d !important;
+  border: 2px solid #39ff14 !important;
+  border-radius: 10px !important;
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  font-family: 'Comic Sans MS', sans-serif !important;
+  font-weight: bold !important;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-shadow: 1px 1px 2px black;
+
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+.settings-action-btn:hover {
+  background: #39ff14 !important;
+  color: #102010 !important;
+  -webkit-text-fill-color: #102010 !important;
+  box-shadow: 0 0 10px #39ff14;
+}
+
+.wallpaper-name {
+  font-size: 13px;
+  color: #7fff50 !important;
+  -webkit-text-fill-color: #7fff50 !important;
+  text-shadow: 1px 1px 2px black;
+  font-style: italic;
+}
+
+/* ==========================================
+   QUICK LINKS LIST IN SETTINGS
+   ========================================== */
+
+#links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+#links-list::-webkit-scrollbar { width: 6px; }
+#links-list::-webkit-scrollbar-track { background: #0c1a0e; border-radius: 3px; }
+#links-list::-webkit-scrollbar-thumb { background: #39ff14; border-radius: 3px; }
+
+.link-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: rgba(57, 255, 20, 0.07);
+  border: 1px solid #2a5a30;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.link-item:hover {
+  background: rgba(57, 255, 20, 0.14);
+}
+
+.link-item-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  /* no chaos animation in settings */
+  animation: none !important;
+}
+
+.link-item-name {
+  flex: 1;
+  font-size: 14px;
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  text-shadow: 1px 1px 2px black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  background: none !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+.link-item-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.link-item-actions button {
+  width: 30px;
+  height: 30px;
+  background: transparent !important;
+  border: 1px solid #2a5a30 !important;
+  border-radius: 7px !important;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  color: unset !important;
+  -webkit-text-fill-color: unset !important;
+
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+.link-item-actions button:hover {
+  background: rgba(57, 255, 20, 0.2) !important;
+  border-color: #39ff14 !important;
+  transform: scale(1.1);
+}
+
+/* Inline edit state */
+.link-item.editing {
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+}
+
+.link-item.editing .settings-input,
+.link-item.editing input {
+  flex: 1;
+  min-width: 100px;
+}
+
+/* ==========================================
+   ADD LINK FORM
+   ========================================== */
+
+.add-link-form {
+  background: rgba(57, 255, 20, 0.05);
+  border: 1px dashed #2a5a30;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.add-link-title {
+  font-size: 14px;
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px black;
+}
+
+.add-link-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.add-link-row-icon {
+  margin-top: 6px;
+}
+
+/* Icon URL field in inline edit — full width below the other two inputs */
+.edit-icon-input {
+  flex-basis: 100%;
+  width: 100%;
+  margin-top: 4px;
+  font-size: 12px !important;
+  opacity: 0.85;
+}
+
+.settings-input {
+  flex: 1;
+  min-width: 110px;
+  padding: 8px 10px;
+  background: #0c1a0e !important;
+  border: 2px solid #2a5a30 !important;
+  border-radius: 8px !important;
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  font-family: 'Comic Sans MS', sans-serif !important;
+  font-weight: bold !important;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+.settings-input::placeholder {
+  color: #3a7a40 !important;
+  -webkit-text-fill-color: #3a7a40 !important;
+}
+
+.settings-input:focus {
+  border-color: #39ff14 !important;
+  box-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
+}
+
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+
+@keyframes spin-text-rainbow {
+  from { --spin-angle: 0deg; }
+  to   { --spin-angle: 360deg; }
+}
+
+@keyframes meme-search-rainbow {
+  from { --meme-search-angle: 0deg; }
+  to   { --meme-search-angle: 360deg; }
+}
+
+@keyframes clock-wobble {
+  0%, 100% { transform: rotate(-2deg) scale(1); }
+  50%       { transform: rotate(2deg) scale(1.06); }
+}
+
+@keyframes icon-chaos {
+  0%   { transform: rotate(0deg) scale(1); }
+  25%  { transform: rotate(15deg) scale(1.25); }
+  50%  { transform: rotate(360deg) scale(0.9); }
+  75%  { transform: rotate(345deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Gentle vertical bob — readable, not a blob */
+@keyframes weather-icon-bob {
+  0%, 100% { transform: translateY(0px) scale(1);    }
+  50%       { transform: translateY(-5px) scale(1.08); }
+}
+
+@keyframes link-panic {
+  0%   { transform: translate(-2px,  1px) rotate(-1deg); }
+  25%  { transform: translate( 2px, -1px) rotate( 1deg); }
+  50%  { transform: translate(-1px,  2px) rotate(-0.5deg); }
+  75%  { transform: translate( 1px, -2px) rotate( 0.5deg); }
+  100% { transform: translate(-2px,  1px) rotate(-1deg); }
+}
