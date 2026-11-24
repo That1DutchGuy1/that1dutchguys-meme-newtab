@@ -41,7 +41,7 @@ Still works, just less features bro. 🤷🏻‍♂️
 > Chromium version:
 1. Go to Manage Extensions in your fucking browser 🌐
 2. Enable Developer Mode 🖥️
-3. Click the damn "Load unpacked" button and select the Chromium version of this crap 🚽
+3. Click the damn "Load unpacked" button and select the Chromium version folder of this crap 🚽
 4. Done! Go do whatever you want with my crap! 🤷🏻‍♂️
 
 ---
@@ -49,7 +49,8 @@ Still works, just less features bro. 🤷🏻‍♂️
 > Firefox version:
 
 1. Go to this Firefox Browser Add-ons page <a href="https://addons.mozilla.org/en-US/firefox/addon/that1dutchguy-s-meme-new-tab/" target="_blank">here</a> in Firefox 🌐
-2. SMASH that ADD button and you're good to fucking go 👍🏻
+2. SMASH that ADD button ➕️
+3. Done! You're good to fucking go 👍🏻
 
 ---
 
