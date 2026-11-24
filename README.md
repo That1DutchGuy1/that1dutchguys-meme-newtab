@@ -65,7 +65,7 @@ Or
 
 ---
 
-### Screenshots gallery (taken in the Chromium version)
+### Screenshots gallery (taken in the Chromium version 1.0)
 
 Main page screenshot 🌈 <br>
 <img src="./README-assets/main-page-screenshot.png" alt="Main page screenshot" width="1280px"/>
