@@ -30,8 +30,26 @@ I made a stupid version for both Chromium browsers and Firefox! 🌐🦊
 
 ### 🔥🦊 Firefox version specs
 
-Pretty much the same in aesthetic, except it lacks a lot of settings and the whole Deranged Toybox feature.
-It's basically the Beta version of it. Still works, just less features bro. 🤷🏻‍♂️
+Pretty much the same in aesthetic, except it lacks a lot of settings and the whole Deranged Toybox feature. <br>
+It's basically the Beta version of it. <br>
+Still works, just less features bro. 🤷🏻‍♂️
+
+---
+
+### ⬇️ How to install
+
+> Chromium version:
+1. Go to Manage Extensions in your fucking browser 🌐
+2. Enable Developer Mode 🖥️
+3. Click the damn "Load unpacked" button and select the Chromium version of this crap 🚽
+4. Done! Go do whatever you want with my crap! 🤷🏻‍♂️
+
+---
+
+> Firefox version:
+
+1. Go to this Firefox Browser Add-ons page <a href="https://addons.mozilla.org/en-US/firefox/addon/that1dutchguy-s-meme-new-tab/" target="_blank">here</a> in Firefox 🌐
+2. SMASH that ADD button and you're good to fucking go 👍🏻
 
 ---
 
