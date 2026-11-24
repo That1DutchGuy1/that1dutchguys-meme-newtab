@@ -94,7 +94,11 @@ Deranged Toybox screenshot 🧸 <br>
 > **A:** Because it's funny. He can now take a shit on your new tab page instead of just the fake browser desktop there. 👑
 
 > **Q: What are the bundled wallpapers?** <br>
-> **A:** Meme Group Photo, Hotel Mario Wallpaper, CD-i Pile Up, King Harkinian's Big Ass Dinner, and Memes On Mountain Lake.
+> **A:** Meme Group Photo, Hotel Mario Wallpaper, CD-i Pile Up, King Harkinian's Big Ass Dinner, and Memes On Mountain Lake. 🤳🏻🏨👑🍷⛰️
+
+> **Q: Why isn't the Chromium version on the Chrome Web Store?** 
+> **A:** Because Google and their €4.56 registration fee can suck my fucking PINGAS! 🍆
+
 ---
 
 ### License 🧾
