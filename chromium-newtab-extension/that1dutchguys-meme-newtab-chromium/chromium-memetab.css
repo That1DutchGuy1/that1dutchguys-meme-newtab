@@ -23,7 +23,7 @@ html, body {
   font-family: 'Comic Sans MS', cursive, sans-serif;
   font-weight: bold;
 
-  background-image: url('Meme-Group-Photo.png');
+  background-image: url('./wallpapers/Meme-Group-Photo.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -1102,6 +1102,43 @@ h2#date-display {
   color: #102010 !important;
   -webkit-text-fill-color: #102010 !important;
   box-shadow: 0 0 10px #39ff14;
+}
+
+.wallpaper-cycle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.wallpaper-cycle-label {
+  font-size: 13px;
+  color: #39ff14 !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  text-shadow: 1px 1px 2px black;
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+
+  background: none !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+.wallpaper-arrow {
+  padding: 6px 14px !important;
+  font-size: 16px !important;
+  line-height: 1;
+  min-width: 40px;
+}
+
+.wallpaper-arrow:disabled {
+  opacity: 0.35 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
 }
 
 .wallpaper-name {

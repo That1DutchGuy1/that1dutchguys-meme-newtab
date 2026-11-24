@@ -11,6 +11,7 @@ I made a stupid version for both Chromium browsers and Firefox! 🌐🦊
 ---
 
 ### 🌐 Chromium version specs
+Current version = 1.1
 
 * 4K Meme Group Photo wallpaper bundled
 * Raw Comic Sans MS TTF file bundled
@@ -19,6 +20,7 @@ I made a stupid version for both Chromium browsers and Firefox! 🌐🦊
 * Time and date display
 * Quick links stack
 * Settings panel where you can swap wallpapers, manage quick links, and other shit
+* Bundled wallpapers folder with loads of wallpapers made by me
 * Deranged Toybox panel with more toys coming soon 
 
 ### Current toys available
@@ -29,6 +31,7 @@ I made a stupid version for both Chromium browsers and Firefox! 🌐🦊
 ---
 
 ### 🔥🦊 Firefox version specs
+Current version = 0.5 <br>
 
 Pretty much the same in aesthetic, except it lacks a lot of settings and the whole Deranged Toybox feature. <br>
 It's basically the Beta version of it. <br>
@@ -75,4 +78,27 @@ Deranged Toybox screenshot 🧸 <br>
 
 --- 
 
-(Note that the Firefox version won't get any updates anymore cuz I don't have the time nor the will to manage two seperate versions all the time 😔)
+(Note that the Firefox version won't get any updates anymore cuz I don't have the time nor the will to manage two seperate versions all the time 🦊)
+
+---
+
+### FAQ ⁉️
+
+> **Q: Why does the Firefox version have less features than the Chromium one?** <br>
+> **A:** Because I don't use Firefox myself and don't have any motivation for updating it. 🤷🏻‍♂️
+
+> **Q: Why is there a Deranged Linux Terminal?** <br>
+> **A:** Because I use Linux myself. Duh. And because it's funny. 🐧
+
+> **Q: Why the fuck did you port the full King Harkinian Desktop Pet - Browser Edition you made on the Shit Ass Toybox to here?** <br>
+> **A:** Because it's funny. He can now take a shit on your new tab page instead of just the fake browser desktop there. 👑
+
+> **Q: What are the bundled wallpapers?** <br>
+> **A:** Meme Group Photo, Hotel Mario Wallpaper, CD-i Pile Up, King Harkinian's Big Ass Dinner, and Memes On Mountain Lake.
+---
+
+### License 🧾
+
+None. Do whatever the fuck you want with this. I don't care. 🤷🏻‍♂️
+
+---

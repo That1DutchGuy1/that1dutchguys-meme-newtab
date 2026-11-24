@@ -199,16 +199,61 @@ async function saveLinks() {
 //  WALLPAPER
 // ==========================================
 
+// ── Bundled wallpapers living in the ./wallpapers/ folder ──
+// Add more entries here as { name, src } to make them cycle-able!
+// The first entry is always the default.
+const BUNDLED_WALLPAPERS = [
+  { name: 'Meme-Group-Photo.png', src: './wallpapers/Meme-Group-Photo.png' },
+  { name: 'hotel-mario-wallpaper.png', src: './wallpapers/hotel-mario-wallpaper.png' },
+  { name: 'Cd-i-Pileup.png', src: './wallpapers/Cd-i-Pileup.png' },
+  { name: 'King-Harkinians-Big-Ass-Dinner.png', src: './wallpapers/King-Harkinians-Big-Ass-Dinner.png' },
+  { name: 'memes-on-mountain-lake.png', src: './wallpapers/memes-on-mountain-lake.png' },
+];
+
+// Tracks which bundled wallpaper is active (-1 = custom upload is active)
+let bundledWallpaperIndex = 0;
+
+function applyBundledWallpaper(idx) {
+  const wp = BUNDLED_WALLPAPERS[idx];
+  document.body.style.backgroundImage = `url('${wp.src}')`;
+  const nameEl = document.getElementById('wallpaper-name');
+  const isDefault = idx === 0;
+  if (nameEl) nameEl.textContent = `Current: ${wp.name}${isDefault ? ' (default)' : ''} ✓`;
+}
+
+function updateWallpaperCycleUI() {
+  const prevBtn = document.getElementById('wallpaper-prev');
+  const nextBtn = document.getElementById('wallpaper-next');
+  if (!prevBtn || !nextBtn) return;
+
+  // Disable arrows if there's only one bundled wallpaper
+  const onlyOne = BUNDLED_WALLPAPERS.length <= 1;
+  prevBtn.disabled = onlyOne;
+  nextBtn.disabled = onlyOne;
+}
+
 async function loadWallpaper() {
-  const data = await chrome.storage.local.get(['wallpaper', 'wallpaperName']);
+  const data = await chrome.storage.local.get(['wallpaper', 'wallpaperName', 'bundledWallpaperIndex']);
+
+  // Custom upload takes priority
   if (data.wallpaper) {
+    bundledWallpaperIndex = -1;
     document.body.style.backgroundImage = `url('${data.wallpaper}')`;
     const nameEl = document.getElementById('wallpaper-name');
     if (nameEl) nameEl.textContent = `Current: ${data.wallpaperName || 'custom image'} ✓`;
+  } else {
+    // Use saved bundled index, falling back to 0 (default)
+    bundledWallpaperIndex = typeof data.bundledWallpaperIndex === 'number'
+      ? Math.max(0, Math.min(data.bundledWallpaperIndex, BUNDLED_WALLPAPERS.length - 1))
+      : 0;
+    applyBundledWallpaper(bundledWallpaperIndex);
   }
+
+  updateWallpaperCycleUI();
 }
 
 async function setWallpaper(dataUrl, fileName) {
+  bundledWallpaperIndex = -1;
   await chrome.storage.local.set({ wallpaper: dataUrl, wallpaperName: fileName });
   document.body.style.backgroundImage = `url('${dataUrl}')`;
   const nameEl = document.getElementById('wallpaper-name');
@@ -216,10 +261,25 @@ async function setWallpaper(dataUrl, fileName) {
 }
 
 async function resetWallpaper() {
+  // Wipe custom upload and go back to bundled index 0 (the default)
+  bundledWallpaperIndex = 0;
   await chrome.storage.local.remove(['wallpaper', 'wallpaperName']);
-  document.body.style.backgroundImage = "url('Meme-Group-Photo.png')";
-  const nameEl = document.getElementById('wallpaper-name');
-  if (nameEl) nameEl.textContent = 'Current: Meme-Group-Photo.png (default)';
+  await chrome.storage.local.set({ bundledWallpaperIndex: 0 });
+  applyBundledWallpaper(0);
+  updateWallpaperCycleUI();
+}
+
+async function cycleBundledWallpaper(direction) {
+  // If a custom upload is active, cycling starts from index 0
+  const startIdx = bundledWallpaperIndex < 0 ? 0 : bundledWallpaperIndex;
+  bundledWallpaperIndex = (startIdx + direction + BUNDLED_WALLPAPERS.length) % BUNDLED_WALLPAPERS.length;
+
+  // Clear any saved custom upload so the bundled one shows on reload
+  await chrome.storage.local.remove(['wallpaper', 'wallpaperName']);
+  await chrome.storage.local.set({ bundledWallpaperIndex: bundledWallpaperIndex });
+
+  applyBundledWallpaper(bundledWallpaperIndex);
+  updateWallpaperCycleUI();
 }
 
 // ==========================================
@@ -329,6 +389,10 @@ wallpaperInput.addEventListener('change', async e => {
 });
 
 wallpaperReset.addEventListener('click', resetWallpaper);
+
+// Bundled wallpaper cycle arrows
+document.getElementById('wallpaper-prev')?.addEventListener('click', () => cycleBundledWallpaper(-1));
+document.getElementById('wallpaper-next')?.addEventListener('click', () => cycleBundledWallpaper(+1));
 
 // Add a new link
 addLinkBtn.addEventListener('click', addLink);
