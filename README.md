@@ -103,6 +103,6 @@ Deranged Toybox screenshot 🧸 <br>
 
 ### License 🧾
 
-None. Do whatever the fuck you want with this. I don't care. 🤷🏻‍♂️
+None. There is no license. Do whatever the fuck you want with this. I don't care. 🤷🏻‍♂️
 
 ---
