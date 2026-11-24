@@ -19,8 +19,8 @@ Current version = 1.1
 * Weather widget powered by Open-Meteo
 * Time and date display
 * Quick links stack
-* Settings panel where you can swap wallpapers, manage quick links, and other shit
-* Bundled wallpapers folder with loads of wallpapers made by me
+* Settings panel where you can upload your own wallpapers, manage quick links, and other shit
+* Bundled wallpapers folder with loads of wallpapers made by me (new feature from version 1.1)
 * Deranged Toybox panel with more toys coming soon 
 
 ### Current toys available
