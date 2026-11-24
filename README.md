@@ -4,7 +4,7 @@
 
 ---
 
-Always wanted to get that stupid corporate boring new tab of yours gone? <br>
+Always wanted to get that stupid fucking corporate ass boring new tab of yours gone? <br>
 Well now you fucking can! 🤯 <br>
 I made a stupid version for both Chromium browsers and Firefox! 🌐🦊
 
@@ -18,7 +18,7 @@ I made a stupid version for both Chromium browsers and Firefox! 🌐🦊
 * Weather widget powered by Open-Meteo
 * Time and date display
 * Quick links stack
-* Settings panel where you can swap wallpapers and manage quick links, and other shit
+* Settings panel where you can swap wallpapers, manage quick links, and other shit
 * Deranged Toybox panel with more toys coming soon 
 
 ### Current toys available
@@ -39,22 +39,30 @@ Still works, just less features bro. 🤷🏻‍♂️
 ### ⬇️ How to install
 
 > Chromium version:
-1. Go to Manage Extensions in your fucking browser 🌐
-2. Enable Developer Mode 🖥️
-3. Click the damn "Load unpacked" button and select the Chromium version folder of this crap 🚽
-4. Done! Go do whatever you want with my crap! 🤷🏻‍♂️
+1. Download and extract the ZIP you downloaded from the Releases tab of this repo ⬇️
+2. Go to Manage Extensions in your fucking browser 🌐
+3. Enable Developer Mode 🖥️
+4. Click the damn "Load unpacked" button and select the Chromium version folder of this crap 🚽
+5. Done! Go do whatever you want with my crap! 🤷🏻‍♂️
 
 ---
 
 > Firefox version:
 
-1. Go to this Firefox Browser Add-ons page <a href="https://addons.mozilla.org/en-US/firefox/addon/that1dutchguy-s-meme-new-tab/" target="_blank">here</a> in Firefox 🌐
+1. Go to this Firefox Browser Add-ons page <a href="https://addons.mozilla.org/en-US/firefox/addon/that1dutchguy-s-meme-new-tab/" target="_blank">here</a> in Firefox 🦊
 2. SMASH that ADD button ➕️
 3. Done! You're good to fucking go 👍🏻
 
+Or
+
+1. Dowload the ZIP from the Releases tab and extract it ⬇️
+2. Go to "Manage extensions" and click the Settings icon ⚙️
+3. Click "Install Add-on From File" and select the fucking `.xpi` in the downloaded folder 📁
+4. Click the goddamn "Add" button and you're good to fucking go 👍🏻
+
 ---
 
-### Screenshots gallery (taken in a Chromium browser)
+### Screenshots gallery (taken in the Chromium version)
 
 Main page screenshot 🌈 <br>
 <img src="./README-assets/main-page-screenshot.png" alt="Main page screenshot" width="1280px"/>
